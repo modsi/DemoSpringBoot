@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Order T-shirt - Product</title>
+	<!-- Favicon -->
+	<link rel="icon" href="../assets/favicon.png" type="image/png">
+	<!-- Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+	<!-- Icons -->
+	<link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
+	<link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+	<!-- Argon CSS -->
+	<link rel="stylesheet" href="../css/argon.css?v=1.2.0" type="text/css">
+</head>
+
+<body>
+	<!-- Main content -->
+	<div class="main-content" id="panel">
+		<!-- Topnav -->
+		<nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb breadcrumb-links breadcrumb-dark" style="background-color: #ffffff;">
+							<li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+							<li class="breadcrumb-item active"><a href="/order">Order</a></li>
+							<li class="breadcrumb-item" aria-current="page"> Product</li>
+						</ol>
+					</nav>
+					<!-- Navbar links -->
+					<ul class="navbar-nav align-items-center  ml-md-auto ">
+
+						<li class="nav-item dropdown">
+							<a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">
+								<i class="ni ni-bell-55"></i>
+							</a>
+
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">
+								<i class="ni ni-ungroup"></i>
+							</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+						<li class="nav-item dropdown">
+							<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">
+								<div class="media align-items-center">
+									<span class="avatar avatar-sm rounded-circle">
+										<img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
+									</span>
+									<div class="media-body  ml-2  d-none d-lg-block">
+										<span class="mb-0 text-sm  font-weight-bold">Sasina Intha</span>
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- Header -->
+		<!-- Header -->
+		<div class="header pb-6 d-flex align-items-center" style="min-height: 100px;">
+
+		</div>
+		<!-- Page content -->
+		<div class="container-fluid mt--6">
+			<div class="row">
+				<div class="col-xl-12 order-xl-1">
+					<div class="card">
+						<div class="card-header">
+							<div class="row align-items-center">
+								<div class="col-8">
+									<h3 class="mb-0">Product List</h3>
+								</div>
+								<div class="col-4 text-right">
+									<a href="/order" class="btn btn-sm btn-default float-right">Back</a>
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="pl-lg-4">
+								<form th:object="${product}" method="post">
+									<div class="row">
+										<h3 class="mb-0" th:field="*{customerOrder}"
+											th:text="' Product in Order :' + ${customerOrder.orderNo}">
+										</h3>
+										<div class="pl-lg-4">
+											<div class="row">
+												<a th:href="@{/product(orderNo=${customerOrder.orderNo})}"
+													class="btn btn-sm btn-info  mr-4">
+													<i class="fas fa-plus"></i> New Product
+												</a>
+											</div>
+										</div>
+										<div class="col-xl-12 order-xl-1">
+											<div class="row">
+												<div class="col-md-2">
+													<div class="form-group">
+														<label class="form-control-label">T-shirt
+															Color</label>
+														<select name="color" id="color" th:field="*{colorMaster}"
+															class="form-control">
+															<option th:each="color: ${colorList}"
+																th:selected="${color==product.colorMaster}"
+																th:value="${color.id}" th:text="${color.colorName}">
+															</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-2">
+													<div class="form-group">
+														<label class="form-control-label">Sleeve
+															Type</label>
+														<select name="sleeve" id="sleeve" th:field="*{sleeveType}"
+															class="form-control">
+															<option th:each="s: ${sleeveList}"
+																th:selected="${s==product.sleeveType}"
+																th:value="${s.id}" th:text="${s.type}">
+															</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="col-md-5">
+													<div class="form-group">
+														<!--<span class="mb-0 text-sm  font-weight-bold"
+															style="color: red;">*</span>-->
+														<label class="form-control-label">Text
+															Screen</label>
+														<input type="text" id="input-first-name"
+															th:value="${product.textScreen}" th:field="*{textScreen}"
+															class="form-control" placeholder="">
+													</div>
+												</div>
+												<div class="col-md-2">
+													<div class="form-group">
+														<label class="form-control-label">Text Color</label>
+														<input type="color" class="form-control" name="mycolor"
+															th:value="${product.textColorCode}"
+															th:field="*{textColorCode}">
+													</div>
+												</div>
+												<div class="col-md-1">
+													<label class="form-control-label"></label>
+													<button type="submit" class="btn form-control btn-neutral btn-icon"
+														name="saveProduct">
+														<i class="fas fa-save"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+										<hr class="my-4" />
+
+									</div>
+								</form>
+								<div class="row">
+									<hr class="my-4" />
+								</div>
+								<div class="row">
+									<div class="table-responsive">
+										<table class="table align-items-center table-flush">
+											<thead class="thead-light">
+												<tr>
+													<th scope="col" class="sort" data-sort="Color">Color</th>
+													<th scope="col" class="sort" data-sort="SleeveType">Sleeve Type
+													</th>
+													<th scope="col" class="sort" data-sort="TextScreen">Text Screen</th>
+													<th scope="col" class="sort" data-sort="TextColorCode">Text Color
+														Code</th>
+													<th scope="col">ACtions</th>
+												</tr>
+											</thead>
+											<tbody class="list">
+												<tr th:each="p: ${products}">
+													<td class="budget" th:text="${p.colorMaster.colorName}"></td>
+													<td class="budget" th:text="${p.sleeveType.type}"></td>
+													<td class="budget" th:text="${p.textScreen}"></td>
+													<td class="budget" th:text="${p.textColorCode}"
+														th:style="'color:'+ ${p.textColorCode} + ';'"></td>
+													<td class="budget">
+														<div class="media align-items-center">
+															<a th:href="@{/product/show(productId=${p.id})}"
+																class="avatar avatar-sm rounded-circle"><i
+																	class="fas fa-eye"></i></a>
+															<a th:href="@{/product/delete(productId=${p.id})}"
+																class="avatar avatar-sm rounded-circle"><i
+																	class="fas fa-trash-alt"></i></a>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="footer pt-0">
+		<div class="row align-items-center justify-content-lg-between">
+			<div class="col-lg-6">
+				<div class="copyright text-center  text-lg-left  text-muted">
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>
